@@ -1,33 +1,45 @@
-int find(int u)
+class DisjointSet{
+vector<int >size,parent;
+public:
+DisjointSet(int n){
+size.resize(n+1);
+parent.resize(n+1);
+for(int i=0;i<=n;i++){
+parent[i]=i;
+size[i]=1;
+}
+}
+int findpar(int u)
 {
     if(u == parent[u])
         return u;
     
     else
-        return parent[u] = find(parent[u]);
+        return parent[u] = findpar(parent[u]);
 }
 
 void dsu (int u, int v)
 {
-    u = find(u);
-    v = find(v);
+    upar = findpar(u);
+    vpar = findpar(v);
     
-    if(u == v)
+    if(upar == vpar)
         return;
     
     else
     {
-        if(size[u] > size[v])
+        if(size[upar] > size[vpar])
         {
-            parent[v] = u;
-            size[u] += size[v];
+            parent[vpar] = upar;
+            size[upar] += size[vpar];
         }
         
         else
         {
-            parent[u] = v;
-            size[v] += size[u];
+            parent[upar] = vpar;
+            size[vpar] += size[upar];
         }
     
     }
+}
 }
