@@ -1,13 +1,13 @@
 int find(int u)
 {
-    if(u == representative[u])
+    if(u == parent[u])
         return u;
     
     else
-        return representative[u] = find(representative[u]);
+        return parent[u] = find(parent[u]);
 }
 
-void combine (int u, int v)
+void dsu (int u, int v)
 {
     u = find(u);
     v = find(v);
@@ -19,13 +19,13 @@ void combine (int u, int v)
     {
         if(size[u] > size[v])
         {
-            representative[v] = u;
+            parent[v] = u;
             size[u] += size[v];
         }
         
         else
         {
-            representative[u] = v;
+            parent[u] = v;
             size[v] += size[u];
         }
     
